@@ -29,6 +29,10 @@ jobs:
         run: |
           docker build -f ${{ matrix.dockerfile }} -t ${{ matrix.image_tag }} .
 
+      - name: Print Trivy version and clean cache
+        run: |
+          docker run --rm aquasec/trivy:latest --version
+
       - name: Scan ${{ matrix.name }} image with Trivy
         run: |
           docker run --rm \
