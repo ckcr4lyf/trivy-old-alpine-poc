@@ -1,0 +1,36 @@
+name: Build and Scan Images
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build-and-scan:
+    name: Build and scan ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Alpine 3.20
+            dockerfile: dockerfiles/alpine_3.20
+            image_tag: trivy-poc:alpine-3.20
+          - name: Alpine 3.23
+            dockerfile: dockerfiles/alpine_3.23
+            image_tag: trivy-poc:alpine-3.23
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build ${{ matrix.name }} image
+        run: |
+          docker build -f ${{ matrix.dockerfile }} -t ${{ matrix.image_tag }} .
+
+      - name: Scan ${{ matrix.name }} image with Trivy
+        run: |
+          docker run --rm \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            aquasec/trivy:latest image --severity HIGH,CRITICAL --scanners vuln ${{ matrix.image_tag }}

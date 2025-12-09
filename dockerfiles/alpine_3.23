@@ -1,0 +1,6 @@
+FROM alpine:3.23
+
+RUN apk update
+RUN apk add --no-cache --repository http://dl-cdn.alpinelinux.org/alpine/v3.20/main icu-libs=74.2-r1
+
+RUN ["/bin/ash"]
