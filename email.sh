@@ -13,7 +13,7 @@ if [ -z "$BTC_PRICE" ] || [ "$BTC_PRICE" == "null" ]; then
 fi
 
 EMAIL_TEMP_FILE=$(mktemp)
-cp "/tmp/email.txt" "$EMAIL_TEMP_FILE"
+cp "email.txt" "$EMAIL_TEMP_FILE"
 sed -i "s|\[DATE\]|$CURRENT_DATE|g" "$EMAIL_TEMP_FILE"
 sed -i "s|\[BTC_PRICE\]|$BTC_PRICE|g" "$EMAIL_TEMP_FILE"
 

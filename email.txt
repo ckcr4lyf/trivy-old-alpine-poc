@@ -1,0 +1,7 @@
+From: Health Check <healthcheck@github.com>
+To: Raghu Saxena <poiasd@saxrag.com>
+Subject: Healthcheck
+Date: [DATE]
+
+This is a healthcheck to ensure your mail-server is still running.
+Current BTC/USD Price: [BTC_PRICE]
