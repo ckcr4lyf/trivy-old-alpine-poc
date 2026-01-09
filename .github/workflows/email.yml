@@ -1,0 +1,18 @@
+name: Send Email Notification
+
+on:
+  push:
+
+jobs:
+  send-email:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set execute permission for email.sh
+        run: chmod +x ./email.sh
+
+      - name: Run email.sh script
+        run: ./email.sh
+
